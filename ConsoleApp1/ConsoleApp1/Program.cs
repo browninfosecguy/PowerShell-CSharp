@@ -19,9 +19,9 @@ namespace ConsoleApp1
 
             PowerShell psPipeline = PowerShell.Create();
 
-            psPipeline.AddCommand("Get-ChildItem");
+            psPipeline.AddCommand("Get-Process");
 
-            psPipeline.AddParameter("Path", "C:\\Users");
+            psPipeline.AddParameter("Name", "chrome");
 
             var pipelineOutput = psPipeline.Invoke();
 
@@ -35,7 +35,10 @@ namespace ConsoleApp1
             {
                 foreach (var objects in pipelineOutput)
                 {
-                    Console.WriteLine(objects);
+                    //If we want to Kill the Process, we invoke the Kill method.
+                    //objects.Methods["kill"].Invoke(); 
+                    
+                    Console.WriteLine(objects.Members["name"].Value + " " + objects.Members["id"].Value);
                 }
 
             }
