@@ -72,3 +72,6 @@ C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPow
 C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\obj\Debug\ASPPowerShell.csproj.CopyComplete
 C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\obj\Debug\ASPPowerShell.dll
 C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\obj\Debug\ASPPowerShell.pdb
+C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\bin\System.Management.Automation.dll
+C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\bin\Microsoft.Management.Infrastructure.dll
+C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\bin\System.Management.Automation.xml

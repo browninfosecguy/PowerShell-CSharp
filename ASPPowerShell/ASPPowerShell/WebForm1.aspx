@@ -18,10 +18,13 @@
             <asp:listitem text="Get-ComputerInfo" value="4"></asp:listitem>
         </asp:DropDownList>
         <p>
-            &nbsp;</p>
-        <p>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine"></asp:TextBox>
         </p>
+        <p>
+            &nbsp;</p>
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="True" AllowSorting="True"  AllowPaging="False" Width="617px">
+            
+        </asp:GridView>
     </form>
 </body>
 </html>
