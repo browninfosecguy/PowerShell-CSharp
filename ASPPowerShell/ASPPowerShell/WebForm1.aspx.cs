@@ -23,7 +23,7 @@ namespace ASPPowerShell
 
             string str = "";
 
-            psPipeline.AddCommand("Get-Process");
+            psPipeline.AddCommand("get-process").AddScript("$input|select-object Name,Id,Path").Invoke(); ;
 
             var results = psPipeline.Invoke();
 
@@ -51,14 +51,14 @@ namespace ASPPowerShell
                 DataColumn processId = new DataColumn("Process Id");
                 processId.DataType = System.Type.GetType("System.Int32");
 
-                //DataColumn processPath = new DataColumn("Process Path");
-                //processPath.DataType = System.Type.GetType("System.String");
+                DataColumn processPath = new DataColumn("Process Path");
+                processPath.DataType = System.Type.GetType("System.String");
 
                 dt.Columns.Add(processName);
                 dt.Columns.Add(processId);
-                //dt.Columns.Add(processPath);
+                dt.Columns.Add(processPath);
 
-
+                
 
                 if (results.Count > 0)
                 {
@@ -70,7 +70,7 @@ namespace ASPPowerShell
 
                         newRow["Process Name"] = obj.Members["name"].Value;
                         newRow["Process Id"] = obj.Members["id"].Value;
-                        //newRow["Process Path"] = obj.Members["path"].Value;
+                        newRow["Process Path"] = obj.Members["Path"].Value;
 
                         dt.Rows.Add(newRow);
                     }

@@ -16,13 +16,13 @@ namespace ConsoleCSharpPS
 
             PowerShell psPipe = PowerShell.Create();
 
-            var objc = psPipe.AddCommand("get-process").Invoke();
+            var objc = psPipe.AddCommand("get-process").AddScript("$input|select-object Name,Id,Path").Invoke();
 
             if(!psPipe.HadErrors)
             {
                 foreach(var obj in objc)
                 {
-                    Console.WriteLine(obj.Members["name"].Value + " " + obj.Members["id"].Value);
+                    Console.WriteLine(obj.Members["Name"].Value + " " + obj.Members["Id"].Value + " " + obj.Members["Path"].Value);
                 }
 
             }
