@@ -16,7 +16,7 @@ namespace ConsoleCSharpPS
 
             PowerShell psPipe = PowerShell.Create();
 
-            var objc = psPipe.AddCommand("get-process").AddScript("$input|select-object Name,Id,Path").Invoke();
+            var objc = psPipe.AddScript("Get-Process|select-object *").Invoke();
 
             if(!psPipe.HadErrors)
             {
