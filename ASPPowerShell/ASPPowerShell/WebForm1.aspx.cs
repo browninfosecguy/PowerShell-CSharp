@@ -8,6 +8,8 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using Microsoft.Ajax.Utilities;
 using System.Data;
+
+
 namespace ASPPowerShell
 {
     public partial class WebForm1 : System.Web.UI.Page
@@ -21,9 +23,20 @@ namespace ASPPowerShell
         {
             PowerShell psPipeline = PowerShell.Create();
 
+            Runspace runSpace = RunspaceFactory.CreateRunspace();
+
+            runSpace.Open();
+
+            RunspaceInvoke runspaceInvoke = new RunspaceInvoke(runSpace);
+
+            runspaceInvoke.Invoke("Set-ExecutionPolicy -Scope Process Unrestricted");
+
+            psPipeline.Runspace = runSpace;
+
+
             string str = "";
 
-            psPipeline.AddCommand("get-process").AddScript("$input|select-object Name,Id,Path").Invoke(); ;
+            psPipeline.AddScript(@"C:\Users\browninfosecguy\Documents\GitHub\PowerShell-CSharp\ASPPowerShell\ASPPowerShell\myScript.ps1");
 
             var results = psPipeline.Invoke();
 
@@ -49,7 +62,7 @@ namespace ASPPowerShell
                 processName.DataType = System.Type.GetType("System.String");
 
                 DataColumn processId = new DataColumn("Process Id");
-                processId.DataType = System.Type.GetType("System.Int32");
+                processId.DataType = System.Type.GetType("System.String");
 
                 DataColumn processPath = new DataColumn("Process Path");
                 processPath.DataType = System.Type.GetType("System.String");
@@ -64,15 +77,15 @@ namespace ASPPowerShell
                 {
                     foreach (var obj in results)
                     {
-                        
-
                         DataRow newRow = dt.NewRow();
 
-                        newRow["Process Name"] = obj.Members["name"].Value;
-                        newRow["Process Id"] = obj.Members["id"].Value;
-                        newRow["Process Path"] = obj.Members["Path"].Value;
+                        
+                            newRow["Process Name"] = obj.Properties["name"].Value;
+                            newRow["Process Id"] = obj.Properties["id"].Value;
+                            newRow["Process Path"] = obj.Properties["Path"].Value;
 
-                        dt.Rows.Add(newRow);
+                            dt.Rows.Add(newRow);
+                        
                     }
                 }
 
