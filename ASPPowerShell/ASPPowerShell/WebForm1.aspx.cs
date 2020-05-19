@@ -40,18 +40,22 @@ namespace ASPPowerShell
 
             var results = psPipeline.Invoke();
 
-            if(results.Count > 0)
-            {
-                foreach(var obj in results)
-                {
-                    str += obj.Members["name"].Value;
-                    str += "\r\n";
-                }
-            }
+            //if(results.Count > 0)
+            //{
+            //    foreach(var obj in results)
+            //    {
+            //        str += obj.Members["name"].Value;
+            //        str += "\r\n";
+            //    }
+            //}
 
             if(DropDownList1.SelectedValue == "1")
             {
-
+                foreach (var obj in results)
+                {
+                    str += obj.ToString();
+                    str += "\r\n";
+                }
                 TextBox1.Text = str;
             }
             else if(DropDownList1.SelectedValue == "2")
