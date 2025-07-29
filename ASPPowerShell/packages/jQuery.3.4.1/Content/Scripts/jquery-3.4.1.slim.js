@@ -5774,7 +5774,7 @@ var
 	/* eslint-disable max-len */
 
 	// See https://github.com/eslint/eslint/issues/3229
-	rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi,
+	// Removed unsafe rxhtmlTag regular expression
 
 	/* eslint-enable */
 
@@ -5976,7 +5976,22 @@ function remove( elem, selector, keepData ) {
 
 jQuery.extend( {
 	htmlPrefilter: function( html ) {
-		return html.replace( rxhtmlTag, "<$1></$2>" );
+		var parser = new DOMParser();
+		var doc = parser.parseFromString(html, "text/html");
+
+		// Convert self-closing tags to open/close pairs
+		doc.querySelectorAll("*").forEach(function(node) {
+			if (node.outerHTML.endsWith("/>")) {
+				var parent = node.parentNode;
+				var newNode = document.createElement(node.tagName);
+				Array.from(node.attributes).forEach(function(attr) {
+					newNode.setAttribute(attr.name, attr.value);
+				});
+				parent.replaceChild(newNode, node);
+			}
+		});
+
+		return doc.body.innerHTML;
 	},
 
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
